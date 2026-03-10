@@ -1,0 +1,28 @@
+{
+    "name": "IOT_Modem_HAL",
+    "version": "0.1.0",
+    "description": "Hardware Abstraction Layer for IOT Modem",
+    "keywords": [
+        "Modem",
+        "2G"
+        "3G"
+        "4G",
+        "IOT"
+    ],
+    "authors": [
+        {
+            "name": "Francesco Simonetti",
+            "maintainer": true,
+            "url": "https://github.com/kkfranco98"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": [
+        "arduino"
+    ],
+    "platforms": "*",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kkfranco98/..."
+    }
+}
