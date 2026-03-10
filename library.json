@@ -1,19 +1,22 @@
 {
     "name": "IOT_Modem_HAL",
     "version": "0.1.0",
-    "description": "Hardware Abstraction Layer for IOT Modem",
+    "description": "Tiny Hardware Abstraction Layer for IoT cellular modems (power, reset, status handling).",
     "keywords": [
-        "Modem",
-        "2G"
-        "3G"
-        "4G",
-        "IOT"
+        "modem",
+        "iot",
+        "cellular",
+        "2g",
+        "3g",
+        "4g",
+        "sim7600",
+        "hal"
     ],
     "authors": [
         {
             "name": "Francesco Simonetti",
             "maintainer": true,
-            "url": "https://github.com/kkfranco98/IOT_Modem_HAL"
+            "url": "https://github.com/kkfranco98"
         }
     ],
     "license": "MIT",
