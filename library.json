@@ -13,7 +13,7 @@
         {
             "name": "Francesco Simonetti",
             "maintainer": true,
-            "url": "https://github.com/kkfranco98"
+            "url": "https://github.com/kkfranco98/IOT_Modem_HAL"
         }
     ],
     "license": "MIT",
@@ -23,6 +23,6 @@
     "platforms": "*",
     "repository": {
         "type": "git",
-        "url": "https://github.com/kkfranco98/..."
+        "url": "https://github.com/kkfranco98/IOT_Modem_HAL"
     }
 }
