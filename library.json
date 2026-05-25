@@ -1,6 +1,6 @@
 {
     "name": "IOT_Modem_HAL",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Tiny Hardware Abstraction Layer for IoT cellular modems (power, reset, status handling).",
     "keywords": [
         "modem",
