@@ -15,6 +15,7 @@ namespace IOT_Modem_HAL::Utility
         GPIO_M pwrkey_gpio;
         GPIO_M rst_gpio;
         GPIO_M status_gpio;
+        GPIO_M power_enable_gpio;
 
         // Power control
         Power_Control_Mode power_control_mode = Power_Control_Mode::UNDEFINED;

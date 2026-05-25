@@ -97,6 +97,12 @@ namespace IOT_Modem_HAL::Modems
                 switch (_modem_hw_config.power_control_mode)
                 {
                 case Power_Control_Mode::AUTO_ON:
+                    {
+                        auto r = set_power_enable(true);
+                        if (r != Result::OK)
+                            return r;
+                    }
+
                     // Nuova accensione: reset contatori (evita ereditare retry vecchi)
                     _unknown_at_tries = 0;
                     _unknown_last_probe_ms = 0;
@@ -110,6 +116,12 @@ namespace IOT_Modem_HAL::Modems
                 case Power_Control_Mode::PWRKEY_ONLY:
                     if (!has_pwrkey_pin())
                         return Result::BAD_CONFIG;
+
+                    {
+                        auto r = set_power_enable(true);
+                        if (r != Result::OK)
+                            return r;
+                    }
 
                     {
                         auto r = generate_pulse(_modem_hw_config.pwrkey_gpio,
@@ -150,6 +162,24 @@ namespace IOT_Modem_HAL::Modems
             using namespace Utility;
 
             update_power_state();
+
+            if (has_power_enable_pin())
+            {
+                auto r = set_power_enable(false);
+                if (r != Result::OK)
+                    return r;
+
+                _unknown_at_tries = 0;
+                _unknown_last_probe_ms = 0;
+                _turnon_at_tries = 0;
+                _turnon_last_probe_ms = 0;
+                _turnoff_at_tries = 0;
+                _turnoff_last_probe_ms = 0;
+                _stable_last_check_ms = 0;
+
+                _modem_status.power_state = Power_State::OFF;
+                return Result::OK;
+            }
 
             switch (_modem_status.power_state)
             {
@@ -272,6 +302,19 @@ namespace IOT_Modem_HAL::Modems
         void update_power_state() override
         {
             using namespace Utility;
+
+            if (has_power_enable_pin() && !power_enable_is_active())
+            {
+                _unknown_at_tries = 0;
+                _unknown_last_probe_ms = 0;
+                _turnon_at_tries = 0;
+                _turnon_last_probe_ms = 0;
+                _turnoff_at_tries = 0;
+                _turnoff_last_probe_ms = 0;
+                _stable_last_check_ms = 0;
+                _modem_status.power_state = Power_State::OFF;
+                return;
+            }
 
             switch (_modem_status.power_state)
             {

@@ -74,6 +74,9 @@ namespace IOT_Modem_HAL::Core
             return Result::FAIL;
         }
 
+        if (setup_optional_gpio(_modem_hw_config.power_enable_gpio) != Result::OK)
+            return Result::BAD_CONFIG;
+
         // --- GPIO opzionali globali (se presenti li configuro) ---
         if (setup_optional_gpio(_modem_hw_config.rst_gpio) != Result::OK)
             return Result::BAD_CONFIG;

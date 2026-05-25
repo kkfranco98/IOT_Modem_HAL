@@ -68,6 +68,30 @@ namespace IOT_Modem_HAL::Core
             return _modem_hw_config.status_gpio.active_high ? level : !level;
         }
 
+        bool power_enable_is_active() const
+        {
+            if (!_modem_hw_config.power_enable_gpio.is_valid())
+                return true;
+
+            const bool level = (digitalRead(_modem_hw_config.power_enable_gpio.pin) == HIGH);
+            return _modem_hw_config.power_enable_gpio.active_high ? level : !level;
+        }
+
+        Utility::Result set_power_enable(bool enabled)
+        {
+            if (!_modem_hw_config.power_enable_gpio.connection_exists())
+                return Utility::Result::OK;
+
+            if (!_modem_hw_config.power_enable_gpio.is_valid() ||
+                _modem_hw_config.power_enable_gpio.mode != Utility::Gpio_Mode::OUTPUT_M)
+                return Utility::Result::BAD_CONFIG;
+
+            modem_digital_write(_modem_hw_config.power_enable_gpio.pin,
+                                enabled,
+                                _modem_hw_config.power_enable_gpio.active_high);
+            return Utility::Result::OK;
+        }
+
         static void wait_ms(uint32_t ms)
         {
             const uint32_t start = millis();
@@ -131,5 +155,6 @@ namespace IOT_Modem_HAL::Core
         bool has_pwrkey_pin() const { return _modem_hw_config.pwrkey_gpio.is_valid(); }
         bool has_rst_pin() const { return _modem_hw_config.rst_gpio.is_valid(); }
         bool has_status_pin() const { return _modem_hw_config.status_gpio.is_valid(); }
+        bool has_power_enable_pin() const { return _modem_hw_config.power_enable_gpio.is_valid(); }
     };
 }
